@@ -3,8 +3,8 @@
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-auto px-2">
-            <a href="#">
-              <img src="assets/img/logo_footer.png" alt="logo footer" id="logo_footer">
+            <a href="<?php echo home_url(); ?>">
+              <img src="<?php bloginfo('template_url'); ?>/images/logo_footer.png" alt="logo footer" id="logo_footer">
             </a>
           </div>
           <div class="col-auto px-2">
@@ -16,6 +16,6 @@
     <!-- Fin de footer -->
 
   
-  <script src="assets/js/main.js"></script>
+    <?php wp_footer();  ?>
 </body>
 </html>
