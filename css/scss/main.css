@@ -310,6 +310,8 @@ body {
 
 #gallery_container .card_gallery .card_bottom .card_credit .card_avatar img {
   width: 46px;
+  height: auto;
+  border-radius: 100%;
 }
 
 #gallery_container .card_gallery .card_bottom .card_credit .card_text {

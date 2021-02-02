@@ -41,6 +41,8 @@
 
       if ($query->have_posts() ) : while ($query->have_posts() ) : $query->the_post(); 
 
+        $user = get_field("autor");
+
       ?>
 
         <div class="col-12 col-sm-6 col-lg-4">
@@ -49,11 +51,11 @@
             <div class="card_bottom">
               <div class="card_credit">
                 <div class="card_avatar">
-                  <img src="<?php bloginfo('template_url'); ?>/images/avatar_sam.png" alt="avatar sam">
+                  <?php echo $user['user_avatar']; ?>
                 </div>
                 <div class="card_text">
-                  <p class="title">Sam Jerremy</p>
-                  <p class="hashtag">#dayAtTheBeach</p>
+                  <p class="title"><?php echo $user['display_name']; ?></p>
+                  <p class="hashtag">#<?php the_field('hashtag'); ?></p>
                 </div>
               </div>
             </div>
