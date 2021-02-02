@@ -19,7 +19,7 @@
           <label for="search">Search by #</label>
           <div class="search_box">
             <input type="text" name="search" id="search">
-            <img src="assets/img/icon_search.png" alt="icon search">
+            <img src="<?php bloginfo('template_url'); ?>/images/icon_search.png" alt="icon search">
           </div>
         </div>
       </div>
@@ -28,114 +28,47 @@
 
     <!-- Comienzo de listado -->
     <div class="row">
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_sam_1.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_sam.png" alt="avatar sam">
-              </div>
-              <div class="card_text">
-                <p class="title">Sam Jerremy</p>
-                <p class="hashtag">#dayAtTheBeach</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Fin de Item -->
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_mads_1.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_mads.png" alt="avatar mads">
-              </div>
-              <div class="card_text">
-                <p class="title">Mads Schmidt</p>
-                <p class="hashtag">#dayABigAssMounntain</p>
+
+      <?php 
+      
+      $args = array(
+        'post_type'  => 'gallery',
+        'orderby'    => 'date',
+        'order'    => 'DESC'
+      );
+
+      $query = new WP_Query( $args );
+
+      if ($query->have_posts() ) : while ($query->have_posts() ) : $query->the_post(); 
+
+      ?>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card_gallery">
+            <div class="card_top" style="background-image:url('<?php if(has_post_thumbnail() ){ echo get_the_post_thumbnail_url(get_the_ID(),'medium_large'); } ?>')"></div>
+            <div class="card_bottom">
+              <div class="card_credit">
+                <div class="card_avatar">
+                  <img src="<?php bloginfo('template_url'); ?>/images/avatar_sam.png" alt="avatar sam">
+                </div>
+                <div class="card_text">
+                  <p class="title">Sam Jerremy</p>
+                  <p class="hashtag">#dayAtTheBeach</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Fin de Item -->
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_chandler_1.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_sam.png" alt="avatar chandler">
-              </div>
-              <div class="card_text">
-                <p class="title">Chandler Smith</p>
-                <p class="hashtag">#catchASun</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Fin de Item -->
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_mads_2.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_mads.png" alt="avatar mads">
-              </div>
-              <div class="card_text">
-                <p class="title">Mads Schmidt</p>
-                <p class="hashtag">#findingHome</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Fin de Item -->
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_chandler_2.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_chandler.png" alt="avatar chandler">
-              </div>
-              <div class="card_text">
-                <p class="title">Chandler Smith</p>
-                <p class="hashtag">#ImNotBatmann</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Fin de Item -->
-      <!-- Comienzo de Item -->
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="card_gallery">
-          <div class="card_top" style="background-image:url('assets/img/hero_sam_2.png')"></div>
-          <div class="card_bottom">
-            <div class="card_credit">
-              <div class="card_avatar">
-                <img src="assets/img/avatar_sam.png" alt="avatar chandler">
-              </div>
-              <div class="card_text">
-                <p class="title">Sam Jerremy</p>
-                <p class="hashtag">#ROCKoN</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Fin de Item -->
+
+      <?php 
+      
+      endwhile;
+      else:
+        echo '<h2>Lo sentimos, no tenemos post para mostrar.</h2>';
+      endif;
+      
+      ?>
+      
     </div>
     <!-- Fin del listado -->
 
