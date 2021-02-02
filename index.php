@@ -1,0 +1,3 @@
+<?php
+
+// Silen is golden
