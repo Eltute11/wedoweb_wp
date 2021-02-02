@@ -18,7 +18,7 @@
         <div class="search_container">
           <label for="search">Search by #</label>
           <div class="search_box">
-            <input type="text" name="search" id="search">
+            <input type="text" name="search" id="search" onkeyup="searchImage()">
             <img src="<?php bloginfo('template_url'); ?>/images/icon_search.png" alt="icon search">
           </div>
         </div>
@@ -27,58 +27,54 @@
     <!-- Fin de buscador -->
 
     <!-- Comienzo de listado -->
-    <div class="row">
+    <div class="row" id="gallery_list">
 
       <?php 
-      
+
+      $paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
+
       $args = array(
         'post_type'  => 'gallery',
         'orderby'    => 'date',
-        'order'    => 'DESC'
+        'order'    => 'DESC',
+        'post_status' => 'publish',
+        'paged' => $paged
       );
 
       $query = new WP_Query( $args );
 
       if ($query->have_posts() ) : while ($query->have_posts() ) : $query->the_post(); 
 
-        $user = get_field("autor");
-
-      ?>
-
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="card_gallery">
-            <div class="card_top" style="background-image:url('<?php if(has_post_thumbnail() ){ echo get_the_post_thumbnail_url(get_the_ID(),'medium_large'); } ?>')"></div>
-            <div class="card_bottom">
-              <div class="card_credit">
-                <div class="card_avatar">
-                  <?php echo $user['user_avatar']; ?>
-                </div>
-                <div class="card_text">
-                  <p class="title"><?php echo $user['display_name']; ?></p>
-                  <p class="hashtag">#<?php the_field('hashtag'); ?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      <?php 
+        get_template_part('template-parts/gallery/content'); 
       
       endwhile;
       else:
         echo '<h2>Lo sentimos, no tenemos post para mostrar.</h2>';
       endif;
-      
+
       ?>
+      <script>
+        var posts_myajax = '<?php echo serialize( $query->query_vars ) ?>';
+        var current_page_myajax = 1;
+        var max_page_myajax = <?php echo $query->max_num_pages ?>;
+      </script>
       
     </div>
     <!-- Fin del listado -->
 
     <!-- Comienzo botón Load More -->
+    <!-- Verificamos si hay mas post que mostrar -->
+    <?php if (  $query->max_num_pages > 1 ) { ?>
+    <div class="row justify-content-center">
+      <div class="spinner my-2 hidden">
+        <img src="<?php bloginfo('template_url'); ?>/images/spinner.gif" alt="spinner">
+      </div>
+    </div>
     <div class="row justify-content-center">
       <button id="load_more_items_gallery">Load More</button>
     </div>
     <!-- Fin botón Load More -->
+    <?php }?>
 
   </div>
 </section>

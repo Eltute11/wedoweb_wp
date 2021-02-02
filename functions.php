@@ -27,7 +27,7 @@ function my_enqueue_styles() {
 
   // JS
   wp_enqueue_script('jQuery');
-  wp_enqueue_script('main');
+  wp_enqueue_script('app');
 }
 
 // Creamos el CPT para la galeria
@@ -81,4 +81,50 @@ function remove_admin_bar() {
   if (!current_user_can('administrator') && !is_admin()) {
     show_admin_bar(false);
   }
+}
+
+
+// Cargamos recursos para activar boton de Ajax
+add_action( 'wp_enqueue_scripts', 'my_load_more_scripts' );
+function my_load_more_scripts() {
+	global $wp_query;
+  
+  // Registramos el script
+  // IMPORTANTE: cargar en footer para pasar parametros de variable desde el front
+  wp_register_script( 'loadmoregallery', get_template_directory_uri() . '/js/loadmoregallery.js', array('jquery'), false, true );
+ 
+  // Damos permiso al JS para utilizar AJAX
+	wp_localize_script( 'loadmoregallery', 'loadmore_params', array(
+		'ajaxurl' => site_url() . '/wp-admin/admin-ajax.php',
+		'posts' => serialize( $wp_query->query_vars ),
+		'current_page' => get_query_var( 'paged' ) ? get_query_var('paged') : 1,
+		'max_page' => $wp_query->max_num_pages
+	) );
+ 
+ 	wp_enqueue_script( 'loadmoregallery' );
+}
+ 
+
+add_action('wp_ajax_loadmore', 'loadmore_ajax_handler'); // wp_ajax_{action}
+add_action('wp_ajax_nopriv_loadmore', 'loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
+function loadmore_ajax_handler(){
+ 
+	// Preparamos los argumentos para la query
+	$args = unserialize( stripslashes( $_POST['query'] ) ); // Recuperamos la query que enviamos por AJAX y serializamos en wp_localize_script 
+	$args['paged'] = $_POST['page'] + 1; // Sumamos +1 para que nos devuelva los datos de la siguiente paginacion
+  
+  // print_r($args); // Solo para testeo
+
+	// ejecutamos la query
+	query_posts( $args );
+ 
+	if( have_posts() ) : while( have_posts() ): the_post();
+ 
+			// Imprimimos los datos obtenidos
+			get_template_part('template-parts/gallery/content'); 
+			// Comentario de abajo solo para testeo
+			// echo '<h1>' + the_title() + '</h1>';
+ 
+  endwhile; endif;
+	die;
 }
