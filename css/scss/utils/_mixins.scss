@@ -1,0 +1,35 @@
+// variables:
+$breakpoint-sm: 575px;
+$breakpoint-md: 767px;
+$breakpoint-lg: 991px;
+$breakpoint-xl: 1199px;
+
+@mixin media-breakpoint-down($media) {
+  @if $media == sm {
+    @media (max-width: $breakpoint-sm) { @content; }
+  }
+  @else if $media == md {
+    @media (max-width: $breakpoint-md) { @content; }
+  }
+  @else if $media == lg {
+    @media (max-width: $breakpoint-lg) { @content; }
+  }
+  @else if $media == xl {
+    @media (max-width: $breakpoint-xl) { @content; }
+  }
+}
+
+@mixin media-breakpoint-up($media) {
+  @if $media == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @else if $media == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @else if $media == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @else if $media == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}

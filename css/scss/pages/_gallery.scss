@@ -1,0 +1,164 @@
+body{
+  font-family: 'Roboto', sans-serif;
+}
+.hero{
+  position: relative;
+  width: 100%;
+  height: 209px;
+  background-image: url('../../img/hero_original.jpg');
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  z-index: 1;
+  background-blend-mode: exclusion;
+  background-color: #C71A65;
+  @include media-breakpoint-down(sm){
+    height: 117px;
+  }
+  .container{
+    z-index: 5;
+    @include media-breakpoint-down(sm){
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    h1{
+      display: inline-block;
+      color: #ffffff;
+      font-size: 60px;
+      font-weight: 700;
+      margin: 0;
+      padding-top: 100px;
+      letter-spacing: 2.6px;
+      @include media-breakpoint-down(sm){
+        font-size: 40px;
+        padding-top: 66px;
+        line-height: 40px;
+      }
+    }
+  }
+}
+
+#gallery_container{
+  .search_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 42px 0 45px;
+    @include media-breakpoint-down(sm){
+      padding: 10px 0 15px;
+    }
+    label{
+      color: #888888;
+      font-size: 20px;
+      margin: 0;
+      padding-right: 8px;
+      @include media-breakpoint-down(sm){
+        display: none;
+      }
+    }
+    .search_box{
+      position: relative;
+      @include media-breakpoint-down(sm){
+        width: 261px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #search{
+        width: 281px;
+        padding: 14px 10px;
+        border: 0px;
+        background-color: #ECECEC;
+        border-radius: 8px;
+        @include media-breakpoint-down(sm){
+          width: 100%;
+          padding: 9px 10px 8px;
+        }
+      }
+      img{
+        width: 29px;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        @include media-breakpoint-down(sm){
+          width: 18px;
+        }
+      }
+    }
+  }
+  .card_gallery{
+    margin-bottom: 34px;
+    border-radius: 8px;
+    overflow: hidden;
+    @include media-breakpoint-down(sm){
+      margin-left: 17px;
+      margin-right: 17px;
+    }
+    .card_top{
+      width: 100%;
+      height: 279px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      @include media-breakpoint-down(md) {
+        height: 200px;
+      }
+      @include media-breakpoint-down(sm) {
+        height: 279px;
+      }
+    }
+    .card_bottom{
+      padding: 13px 10px 12px;
+      background-color: rgba(214, 213, 214, 0.45);
+      .card_credit{
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        .card_avatar{
+          img{
+            width: 46px;
+          }
+        }
+        .card_text{
+          margin-left: 10px;
+          @include media-breakpoint-down(sm) {
+            margin-left: 6px;
+          }
+          p{
+            margin: 0;
+          }
+          .title{
+            color: $color-black;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+          .hashtag{
+            color: $color-black;
+            font-size: 14px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
+
+#load_more_items_gallery{
+  color: $color-primary;
+  font-size: 20px;
+  line-height: 17px;
+  background-color: transparent;
+  border: 0;
+  margin-top: 26px;
+  margin-bottom: 98px;
+  &:hover{
+    cursor: pointer;
+  }
+  @include media-breakpoint-down(sm) {
+    margin-top: 23px;
+    margin-bottom: 78px;
+  }
+}

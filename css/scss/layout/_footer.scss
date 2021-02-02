@@ -1,0 +1,30 @@
+footer{
+  padding-top: 11px;
+  padding-bottom: 13px;
+  background-color: $color-black;
+  border-top: 6px solid $color-primary;
+  @include media-breakpoint-down(sm){
+    padding-bottom: 10px;
+    padding-top: 14px;
+  }
+  a{
+    display: inline-block;
+    @include media-breakpoint-down(sm){
+      display: none;
+    }
+    #logo_footer{
+      width: 100%;
+      max-width: 144px;
+    }
+  }
+  .copyright{
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0;
+    @include media-breakpoint-down(sm){
+      font-size: 16px;
+    }
+  }
+}
