@@ -4,7 +4,7 @@
 En la primer instancia pasamos de un archivo Adobe XD a HTML. El código del mismo pueden encontrarlo en este [repositorio](https://github.com/Eltute11/wedoweb). El sitio se encuentra online para visualizar desde [aquí](https://eltute11.github.io/wedoweb/index.html).
 
 ## HTML a Wordpress
-En esta segunda instancia tomamos el código generado anteriormente para hacerlo compatible con Wordpress y crear un custom theme.
+En esta segunda instancia tomamos el código generado anteriormente para hacerlo compatible con Wordpress y crear un custom theme. **Las funcionalidades del botón Load More y el filtro por búsqueda, solo pueden visualizarse descargando la rama [extras](https://github.com/Eltute11/wedoweb_wp/tree/extras), ya que en lo solicitado no solicitaba dichas acciones.**
 
 ## Pasos para la implementación
 
